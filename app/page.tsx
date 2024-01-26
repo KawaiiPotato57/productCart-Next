@@ -1,9 +1,10 @@
 import React from "react";
 // import Welcome from "./welcome/Welcome";
-import ProductDetail from "./productDetails/ProductDetail";
+// import ProductDetail from "./productDetails/ProductDetail";
 import Navbar from "./components/navbar/Navbar";
 // import Card from "./components/card/Card";
-
+import CartCard from "./components/cartCard/CartCard";
+import Cart from "./cart/Cart";
 export default function Home() {
   const products = [
     {
@@ -71,15 +72,10 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <div className="flex justify-center items-center h-screen">
-        <ProductDetail
-          title="Test Product"
-          category="Electronic"
-          image="https://img.freepik.com/premium-photo/there-is-painting-sunset-with-birds-flying-water-generative-ai_927978-7229.jpg"
-          description="Dive into the world of abstract painting and discover techniques that bring your visions to life."
-          price={13.5}
-        />
+      <div className="flex flex-col  h-screen">
+        <Cart />
       </div>
+
       {/* <div className="flex flex-wrap justify-center items-center px-8 py-6">
         {products.map((product) => (
           <Card
@@ -92,6 +88,23 @@ export default function Home() {
           />
         ))}
       </div> */}
+      {/* <ProductDetail
+          title="Test Product"
+          category="Electronic"
+          image="https://img.freepik.com/premium-photo/there-is-painting-sunset-with-birds-flying-water-generative-ai_927978-7229.jpg"
+          description="Dive into the world of abstract painting and discover techniques that bring your visions to life."
+          price={13.5}
+        />
+    */}
+
+      {/* <CartCard
+          imageSrc="https://via.placeholder.com/136x119"
+          productName="Test Product"
+          price={20}
+          quantity={1}
+          // onDecreaseClick={() => console.log("Decrease clicked")}
+          // onIncreaseClick={() => console.log("Increase clicked")}
+        /> */}
     </>
   );
 }
