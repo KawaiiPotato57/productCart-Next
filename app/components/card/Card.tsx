@@ -33,7 +33,7 @@ const Card: React.FC<CardProps> = ({
       />
 
       <div className="w-300 mt-6">
-        <Link href={`/products`}>
+        <Link href={`/`}>
           <span className="text-xl font-bold overflow-hidden text-overflow-ellipsis line-clamp-1 hover:overflow-visible hover:block">
             {title}
           </span>
