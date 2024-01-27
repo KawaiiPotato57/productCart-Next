@@ -1,83 +1,47 @@
-import React from "react";
-// import Welcome from "./welcome/Welcome";
-// import ProductDetail from "./productDetails/ProductDetail";
+"use client";
+import React, { useState, useEffect } from "react";
+import Welcome from "./welcome/Welcome";
+import ProductDetail from "./productDetails/ProductDetail";
 import Navbar from "./components/navbar/Navbar";
-// import Card from "./components/card/Card";
+import Card from "./components/card/Card";
 import CartCard from "./components/cartCard/CartCard";
 import Cart from "./cart/Cart";
-export default function Home() {
-  const products = [
-    {
-      id: 1,
-      image:
-        "https://img.freepik.com/premium-photo/there-is-painting-sunset-with-birds-flying-water-generative-ai_927978-7229.jpg",
-      title: "Product Title 1",
-      category: "Category 1",
-      description:
-        "Product Description goes here. It can be a bit longer to see how it wraps. Product Description goes here. It can be a bit longer to see how it wraps.",
-      price: 99.99,
-    },
-    {
-      id: 2,
-      image:
-        "https://img.freepik.com/premium-photo/there-is-painting-sunset-with-birds-flying-water-generative-ai_927978-7229.jpg",
-      title: "Product Title 2",
-      category: "Category 2",
-      description:
-        "Product Description goes here. It can be a bit longer to see how it wraps. Product Description goes here. It can be a bit longer to see how it wraps.",
-      price: 129.99,
-    },
-    {
-      id: 3,
-      image:
-        "https://img.freepik.com/premium-photo/there-is-painting-sunset-with-birds-flying-water-generative-ai_927978-7229.jpg",
-      title: "Product Title 2",
-      category: "Category 2",
-      description:
-        "Product Description goes here. It can be a bit longer to see how it wraps. Product Description goes here. It can be a bit longer to see how it wraps.",
-      price: 129.99,
-    },
-    {
-      id: 4,
-      image:
-        "https://img.freepik.com/premium-photo/there-is-painting-sunset-with-birds-flying-water-generative-ai_927978-7229.jpg",
-      title: "Product Title 2",
-      category: "Category 2",
-      description:
-        "Product Description goes here. It can be a bit longer to see how it wraps. Product Description goes here. It can be a bit longer to see how it wraps.",
-      price: 129.99,
-    },
-    {
-      id: 5,
-      image:
-        "https://img.freepik.com/premium-photo/there-is-painting-sunset-with-birds-flying-water-generative-ai_927978-7229.jpg",
-      title: "Product Title 2",
-      category: "Category 2",
-      description:
-        "Product Description goes here. It can be a bit longer to see how it wraps. Product Description goes here. It can be a bit longer to see how it wraps.",
-      price: 129.99,
-    },
-    {
-      id: 6,
-      image:
-        "https://img.freepik.com/premium-photo/there-is-painting-sunset-with-birds-flying-water-generative-ai_927978-7229.jpg",
-      title: "Product Title 2",
-      category: "Category 2",
-      description:
-        "Product Description goes here. It can be a bit longer to see how it wraps. Product Description goes here. It can be a bit longer to see how it wraps.",
-      price: 129.99,
-    },
-    // Add more products as needed
-  ];
+
+interface Product {
+  id: number;
+  image: string;
+  title: string;
+  category: string;
+  description: string;
+  price: number;
+}
+
+const Home: React.FC = () => {
+  const [productData, setProductData] = useState<Product[]>([]);
+  const [category, setCategory] = useState<string>("");
+
+  const changeCategory = (category: string) => {
+    console.log("in main", category);
+    setCategory(`category/${category}`);
+  };
+  useEffect(() => {
+    fetch(`https://fakestoreapi.com/products/${category}`)
+      .then((res) => res.json())
+      .then((json) => {
+        setProductData(json);
+        console.log(productData);
+      });
+  }, [category]);
+
   return (
     <>
-      <Navbar />
-      <div className="flex flex-col  h-screen">
+      <Navbar changeCategory={changeCategory} />
+      {/* <div className="flex flex-col  h-screen">
         <Cart />
-      </div>
+      </div> */}
 
-      {/* <div className="flex flex-wrap justify-center items-center px-8 py-6">
-        {products.map((product) => (
+      <div className="flex flex-wrap justify-center items-center px-8 py-6">
+        {productData.map((product) => (
           <Card
             key={product.id}
             image={product.image}
@@ -87,24 +51,30 @@ export default function Home() {
             price={product.price}
           />
         ))}
-      </div> */}
-      {/* <ProductDetail
+      </div>
+    </>
+  );
+};
+
+export default Home;
+
+{
+  /* <ProductDetail
           title="Test Product"
           category="Electronic"
           image="https://img.freepik.com/premium-photo/there-is-painting-sunset-with-birds-flying-water-generative-ai_927978-7229.jpg"
           description="Dive into the world of abstract painting and discover techniques that bring your visions to life."
           price={13.5}
-        />
-    */}
+        /> */
+}
 
-      {/* <CartCard
+{
+  /* <CartCard
           imageSrc="https://via.placeholder.com/136x119"
           productName="Test Product"
           price={20}
           quantity={1}
           // onDecreaseClick={() => console.log("Decrease clicked")}
           // onIncreaseClick={() => console.log("Increase clicked")}
-        /> */}
-    </>
-  );
+        /> */
 }

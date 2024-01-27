@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { CiShoppingCart } from "react-icons/ci";
 
 interface CardProps {
@@ -32,9 +33,17 @@ const Card: React.FC<CardProps> = ({
       />
 
       <div className="w-300 mt-6">
-        <h2 className="text-xl font-bold">{title}</h2>
+        <Link href={`/products`}>
+          <span className="text-xl font-bold overflow-hidden text-overflow-ellipsis line-clamp-1 hover:overflow-visible hover:block">
+            {title}
+          </span>
+        </Link>
         <p className="text-sm text-gray-500 ">{category}</p>
-        <p className="mt-6 text-[14px]">{description}</p>
+
+        {/* <p className=" mt-6 text-[14px] ">{description}</p> */}
+        <p className="mt-6 text-[14px] overflow-hidden text-overflow-ellipsis line-clamp-3">
+          {description}
+        </p>
         <p className="mt-6 text-[13px]">
           Price: <span className="text-lg font-bold mt-2">${price}</span>
         </p>
